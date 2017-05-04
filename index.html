@@ -76,6 +76,7 @@
                 <thead>
                     <tr>
                         <td>Nation</td>
+                        <td>Created</td>
                         <td>Civil Rights</td>
                         <td>Economy</td>
                         <td>Political Freedom</td>
@@ -171,7 +172,7 @@
         });
 
         function getInfoOfArray(theAccounts){
-            $.get("https://www.nationstates.net/cgi-bin/api.cgi?nation=" + theAccounts[0] + "&q=gdp+deaths+tax+freedom+freedomscores+govt+income+sectors+population+poorest+richest+name", function (data, status) {
+            $.get("https://www.nationstates.net/cgi-bin/api.cgi?nation=" + theAccounts[0] + "&q=gdp+deaths+founded+tax+freedom+freedomscores+govt+income+sectors+population+poorest+richest+name", function (data, status) {
 
                 var json = cleanXML(data);
 
@@ -298,6 +299,7 @@
         function fillOutBasicInfo(data){
             var newRow = '<tr>';
             newRow += createLink(data.NAME);
+            newRow += '<td>'+data.FOUNDED+'</td>';
             newRow += '<td>'+data.FREEDOM.CIVILRIGHTS+' ('+data.FREEDOMSCORES.CIVILRIGHTS+')</td>';
             newRow += '<td>'+data.FREEDOM.ECONOMY+' ('+data.FREEDOMSCORES.ECONOMY+')</td>';
             newRow += '<td>'+data.FREEDOM.POLITICALFREEDOM+' ('+data.FREEDOMSCORES.POLITICALFREEDOM+')</td>';
