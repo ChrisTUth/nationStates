@@ -160,7 +160,7 @@
         var bot10 = [];
         var top10 = [];
 
-        var accounts = ['hacktopia'/*,'xml','xml_v2','xml_v3','uthtopia_ii','rondopolis','uthblowsopolis'*/];
+        var accounts = ['hacktopia','xml','xml_v2','xml_v3','uthtopia_ii','rondopolis','uthblowsopolis'];
         var progressBar = 0;
         var progressBit = 100/accounts.length;
 	var progressNumber = 0;
@@ -173,12 +173,7 @@
         function getInfoOfArray(theAccounts){
             $.get("https://www.nationstates.net/cgi-bin/api.cgi?nation=" + theAccounts[0] + "&q=gdp+deaths+tax+freedom+freedomscores+govt+income+sectors+population+poorest+richest+name", function (data, status) {
 
-                var json = xml2json(data);
-                json = json.substring(20, json.length - 1);
-                json = json.replace(/\@/g, '');
-                json = json.replace(/\#/g, '');
-                json = $.parseJSON(json);
-                console.log(json);
+                var json = cleanXML(data);
 
                 taxes.push([json.NAME,parseFloat(json.TAX)]);
                 gdp.push([json.NAME,parseInt(json.GDP/1000000000)]);
@@ -199,6 +194,15 @@
                     getInfoOfArray(theAccounts.splice(1, theAccounts.length));
                 }
             });
+        }
+
+        function cleanXML(data){
+            data = xml2json(data);
+            data = data.substring(20, data.length - 1);
+            data = data.replace(/\@/g, '');
+            data = data.replace(/\#/g, '');
+            data = $.parseJSON(data);
+            return data;
         }
         
         function chartGen() {
