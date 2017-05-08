@@ -1,0 +1,15 @@
+body{
+	background-color: #444444;
+	color:#EEEEEE;
+}
+
+.footable-odd{
+	background-color: #444444;
+}
+
+a, a:hover, a:visited, a:active{
+	color: #EEEEEE;
+}
+g{
+	color: #EEEEEE;
+}
